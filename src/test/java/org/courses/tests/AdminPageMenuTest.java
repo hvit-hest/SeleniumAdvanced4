@@ -26,7 +26,7 @@ public class AdminPageMenuTest {
     @BeforeClass
     public void beforeClass() {
         myPersonalDriver = new WebDriverSelection().getDriverFromProperties();
-        myPersonalDriver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        myPersonalDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         adminPage = new AdminPage(myPersonalDriver);
         adminPage.open();
         if (!adminPage.isLoginFormOpen())
