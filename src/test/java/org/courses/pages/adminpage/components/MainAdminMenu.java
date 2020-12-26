@@ -3,7 +3,7 @@ package org.courses.pages.adminpage.components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+
 
 public class MainAdminMenu {
 
@@ -21,29 +21,32 @@ public class MainAdminMenu {
 
         menuOptionWe.click();
 
-        /*Sometimes it is not clicking without any message. That is why the second try.
+        /*Sometimes driver is not clicking (very rare) without any message and reason when moving from bottom item of menu
+        to top item.  That is why the second try.
          */
-        WebElement we = myPersonalDriver.
-                    findElement(By.xpath(String.format(searchForMainItemXpath, menuOption)));
-        if (!we.getCssValue("color").equals("rgba(255, 0, 0, 1)")) {
-            Actions action = new Actions(myPersonalDriver);
-            action.moveToElement(we).click().build().perform();
+        menuOptionWe = myPersonalDriver.
+                findElement(By.xpath(String.format(searchForMainItemXpath, menuOption)));
+        if (!menuOptionWe.getCssValue("color").equals("rgba(255, 0, 0, 1)")) {
+            myPersonalDriver.navigate().refresh();
+            myPersonalDriver.findElement(By.xpath(String.format(searchForMainItemXpath, menuOption))).click();
         }
     }
 
     public void selectSubMenuOption(String subMenuOption) {
+
         WebElement subMenuOptionWe = myPersonalDriver.
                 findElement(By.xpath(String.format(searchForSubMenuItemXpath, subMenuOption)));
 
-         subMenuOptionWe.click();
+        subMenuOptionWe.click();
 
-          /*Sometimes it is not clicking without any message. That is why the second try.
-           */
-        WebElement we = myPersonalDriver.
+         /*Sometimes driver is not clicking (very rare) without any message and reason when moving from bottom item of menu
+        to top item.  That is why the second try.
+         */
+        subMenuOptionWe = myPersonalDriver.
                 findElement(By.xpath(String.format(searchForSubMenuItemXpath, subMenuOption)));
-        if (!we.getCssValue("color").equals("rgba(255, 0, 0, 1)")) {
-            Actions action = new Actions(myPersonalDriver);
-            action.moveToElement(we).click().build().perform();
+        if (!subMenuOptionWe.getCssValue("color").equals("rgba(255, 0, 0, 1)")) {
+            myPersonalDriver.navigate().refresh();
+            myPersonalDriver.findElement(By.xpath(String.format(searchForSubMenuItemXpath, subMenuOption))).click();
         }
 
     }
