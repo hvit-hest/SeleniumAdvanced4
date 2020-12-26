@@ -16,8 +16,17 @@ public class MainAdminMenu {
     }
 
     public void selectMenuOption(String menuOption) {
+        selectMenuOption(menuOption, searchForMainItemXpath);
+    }
+
+    public void selectSubMenuOption(String subMenuOption) {
+        selectMenuOption(subMenuOption, searchForSubMenuItemXpath);
+    }
+
+
+    private void selectMenuOption(String menuOption, String searchMenuOptionXpath) {
         WebElement menuOptionWe = myPersonalDriver.
-                findElement(By.xpath(String.format(searchForMainItemXpath, menuOption)));
+                findElement(By.xpath(String.format(searchMenuOptionXpath, menuOption)));
 
         menuOptionWe.click();
 
@@ -25,29 +34,10 @@ public class MainAdminMenu {
         to top item.  That is why the second try.
          */
         menuOptionWe = myPersonalDriver.
-                findElement(By.xpath(String.format(searchForMainItemXpath, menuOption)));
+                findElement(By.xpath(String.format(searchMenuOptionXpath, menuOption)));
         if (!menuOptionWe.getCssValue("color").equals("rgba(255, 0, 0, 1)")) {
             myPersonalDriver.navigate().refresh();
-            myPersonalDriver.findElement(By.xpath(String.format(searchForMainItemXpath, menuOption))).click();
+            myPersonalDriver.findElement(By.xpath(String.format(searchMenuOptionXpath, menuOption))).click();
         }
-    }
-
-    public void selectSubMenuOption(String subMenuOption) {
-
-        WebElement subMenuOptionWe = myPersonalDriver.
-                findElement(By.xpath(String.format(searchForSubMenuItemXpath, subMenuOption)));
-
-        subMenuOptionWe.click();
-
-         /*Sometimes driver is not clicking (very rare) without any message and reason when moving from bottom item of menu
-        to top item.  That is why the second try.
-         */
-        subMenuOptionWe = myPersonalDriver.
-                findElement(By.xpath(String.format(searchForSubMenuItemXpath, subMenuOption)));
-        if (!subMenuOptionWe.getCssValue("color").equals("rgba(255, 0, 0, 1)")) {
-            myPersonalDriver.navigate().refresh();
-            myPersonalDriver.findElement(By.xpath(String.format(searchForSubMenuItemXpath, subMenuOption))).click();
-        }
-
     }
 }
