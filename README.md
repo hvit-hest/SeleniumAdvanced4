@@ -1,3 +1,3 @@
-# SeleniumHomeWork4
+# SeleniumAdvanced4
 
 mvn clean test -P chrome
